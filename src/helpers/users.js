@@ -3,10 +3,10 @@ const Model = require('../models/messages');
 
 const users = {};
 
-const generetorMessage = async ({ chatMessage, nickname }, io) => {
+const generetorMessage = async ({ message, nickname }, io) => {
   const timestamp = moment().format('DD-MM-yyyy HH:mm:ss A');
-  await Model.create({ message: chatMessage, nickname, timestamp });
-  io.emit('message', `${timestamp} - ${nickname}: ${chatMessage}`);
+  await Model.create({ message, nickname, timestamp });
+  io.emit('message', `${timestamp} - ${nickname}: ${message}`);
 };
 
 const getListUsers = () => Object.values(users);

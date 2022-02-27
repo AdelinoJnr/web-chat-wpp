@@ -4,6 +4,7 @@ const cors = require('cors');
 const http = require('http');
 const socket = require('socket.io');
 const webChat = require('../sockets/webChat');
+const Controller = require('../controllers/messages');
 require('dotenv').config();
 
 const { PORT_FRONT } = process.env;
@@ -18,5 +19,7 @@ const server = http.createServer(app);
 const io = socket(server, configCors);
 
 webChat(io);
+
+app.get('/messages', Controller.getAllMessages);
 
 module.exports = server;
